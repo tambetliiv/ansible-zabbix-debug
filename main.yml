@@ -1,0 +1,29 @@
+---
+- name: Install and configure zabbix agent
+  hosts: all
+  roles:
+    - role: community.zabbix.zabbix_agent
+      #lean_delivery.zabbix_agent
+      zabbix_agent_server: zabbix-server
+      zabbix_agent_serveractive: zabbix-server
+      zabbix_agent_hostname: "{{ inventory_hostname }}"
+      zabbix_url: "http://zabbix-web:8080/"
+      zabbix_api_user: "Admin"
+      zabbix_api_pass: "zabbix"
+      zabbix_host_status: "enabled"
+      zabbix_host_groups:
+        - Linux servers
+      zabbix_link_templates:
+        - Linux by Zabbix agent
+      zabbix_inventory_mode: "manual"
+      zabbix_api_create_hosts: yes
+      zabbix_useuip: "1"
+      zabbix_agent_interfaces:
+        - type: "1"
+          main: "1"
+          useip: "1"
+          ip: "127.0.0.1"
+          dns: "host"
+          port: "10051"
+
+
